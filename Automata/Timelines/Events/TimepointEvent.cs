@@ -13,11 +13,14 @@ public class TimepointEvent : TimelineEvent
 
     public override async Task Run()
     {
-        if(Recently() || !AtPoint())
-            return;
+        using (await Timestamp.TokenLock())
+        {
+            if (Recently() || !AtPoint())
+                return;
 
-        var yield = await Invoke();
-        return;
+            var yield = await Invoke();
+            return;
+        }
     }
 
     private bool AtPoint()

@@ -78,17 +78,27 @@ public class Timeline
 
             var task = Task
                 .Run(condition.Run)
-                .HandleExceptions(Logger, "condition task");
+                .HandleExceptions(Logger, "timeline event task");
             tasks.Add(task);
         }
 
         await Task.WhenAll(tasks);
     }
 
-    public void Add(TimelineEvent tc)
+    public void Add(TimelineEvent te)
     {
-        tc.Timeline = this;
-        Events.Add(tc);
+        Add(te,true);
+    }
+
+    public void Add(TimelineEvent te, bool unite)
+    {
+        te.Timeline = this;
+        Events.Add(te);
+        if (unite)
+        {
+            if (Events.Count > 1)
+                Events[0].Unite(te);
+        }
     }
 
     /// <summary>

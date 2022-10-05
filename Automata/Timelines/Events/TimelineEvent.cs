@@ -54,5 +54,33 @@ public abstract class TimelineEvent
 /// </summary>
 public class Timestamp
 {
+    private readonly SemaphoreSlim _semaphoreSlim;
+    
     public Instant Stamp { get; set; }
+
+    public Timestamp()
+    {
+        _semaphoreSlim = new SemaphoreSlim(1);
+    }
+
+    public async Task<SemaphoreToken> TokenLock()
+    {
+        await _semaphoreSlim.WaitAsync();
+        return new SemaphoreToken(_semaphoreSlim);
+    }
+}
+
+public class SemaphoreToken : IDisposable
+{
+    private readonly SemaphoreSlim _semaphoreSlim;
+
+    public SemaphoreToken(SemaphoreSlim semaphoreSlim)
+    {
+        _semaphoreSlim = semaphoreSlim;
+    }
+
+    public void Dispose()
+    {
+        _semaphoreSlim.Release();
+    }
 }

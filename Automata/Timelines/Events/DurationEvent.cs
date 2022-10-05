@@ -14,9 +14,12 @@ public class DurationEvent : TimelineEvent
 
     public override async Task Run()
     {
-        Tick();
-        var yield = await RunIfCondition();
-        return;
+        using (await Timestamp.TokenLock())
+        {
+            Tick();
+            var yield = await RunIfCondition();
+            return;
+        }
     }
 
     private void Tick()

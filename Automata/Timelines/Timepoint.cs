@@ -46,8 +46,8 @@ public readonly struct Timepoint
     /// <summary>
     /// Создает новую точку времени. Просто укороченная запись создания нового экземпляра.
     /// </summary>
-    public static Timepoint New(int hour, int minute, Period period)
+    public static Timepoint New(int hour, int minute, Period threshold)
     {
-        return new Timepoint(new LocalTime(hour, minute), period);
+        return new Timepoint(new LocalTime(hour, minute), threshold);
     }
 }
