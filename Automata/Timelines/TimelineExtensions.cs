@@ -6,7 +6,7 @@ namespace Automata.Timelines;
 
 public static class TimelineExtensions
 {
-    public static TimelineEvent OnDuration(this Timeline timeline, Func<Task<YieldStatement>> action, Duration duration,
+    public static TimelineEvent Duration(this Timeline timeline, Func<Task<YieldStatement>> action, Duration duration,
         bool unite = true)
     {
         var durationEvent = new DurationEvent(action, duration);
@@ -14,7 +14,7 @@ public static class TimelineExtensions
         return durationEvent;
     }
 
-    public static TimelineEvent OnElapsed(this Timeline timeline, Func<Task<YieldStatement>> action,Duration duration,
+    public static TimelineEvent Elapsed(this Timeline timeline, Func<Task<YieldStatement>> action,Duration duration,
         bool unite = true)
     {
         var elapsedEvent = new ElapsedEvent(action, duration);
@@ -22,7 +22,7 @@ public static class TimelineExtensions
         return elapsedEvent;
     }
 
-    public static TimelineEvent OnTime(this Timeline timeline, Func<Task<YieldStatement>> action,
+    public static TimelineEvent Time(this Timeline timeline, Func<Task<YieldStatement>> action,
         int hour, int minute, Period threshold, bool unite = true)
     {
         var timepointEvent = new TimepointEvent(action, Timepoint.New(hour, minute, threshold));
