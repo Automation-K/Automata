@@ -4,7 +4,7 @@ namespace Automata.Yielding;
 /// Данный тип нужен для передачи данных из итератора внешнему получателю. Экземпляр объекта нужно передать аргументом в
 /// метод итератора и ожидать завершения задачи, доступной для чтения внутри этого объекта. 
 /// </summary>
-public class YieldData<T>
+public class Yield<T>
 {
     private T? _value;
 
@@ -22,7 +22,7 @@ public class YieldData<T>
 
     public Task<T?> Task => Source.Task;
 
-    public YieldData()
+    public Yield()
     {
         Source = new TaskCompletionSource<T?>();
     }
