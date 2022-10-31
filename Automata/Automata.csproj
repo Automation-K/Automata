@@ -4,6 +4,16 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>Automata</Title>
+        <Authors>Kirill Gasanov</Authors>
+        <Description>Contains usefull classes for program automation</Description>
+        <PackageProjectUrl>https://github.com/EGSP/Automata</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/EGSP/Automata</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/EGSP/Automata</RepositoryUrl>
+        <RepositoryType>Github</RepositoryType>
+        <PackageTags>automation</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>AutomataK</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
