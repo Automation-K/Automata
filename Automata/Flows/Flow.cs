@@ -6,9 +6,9 @@ namespace Automata.Flows;
 
 public abstract class Flow
 {
-    protected readonly LifetimeDefinition LifetimeDefinition; 
-    
-    protected ILogger Logger { get; }
+    protected readonly LifetimeDefinition LifetimeDefinition;
+
+    protected readonly ILogger Logger;
     
     protected Flow(ILogger logger)
     {
