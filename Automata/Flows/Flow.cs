@@ -9,6 +9,8 @@ public abstract class Flow
     protected readonly LifetimeDefinition LifetimeDefinition;
 
     protected readonly ILogger Logger;
+
+    public Lifetime Lifetime => LifetimeDefinition.Lifetime;
     
     protected Flow(ILogger logger)
     {
