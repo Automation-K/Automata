@@ -30,13 +30,18 @@ public abstract class Flow
 
     public async Task Ini()
     {
+        if (LifetimeDefinition.Status != LifetimeStatus.Alive)
+            return;
+        
         await Start();
     }
 
     public async Task Terminate()
     {
+        if (LifetimeDefinition.Status != LifetimeStatus.Alive)
+            return;
+        
         await Task.Run(()=>LifetimeDefinition.Terminate())
             .HandleExceptions(Logger, "flow-exception-logger");
-        return;
     }
 }
