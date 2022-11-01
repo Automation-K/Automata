@@ -12,19 +12,12 @@ public abstract class Flow
 
     public Lifetime Lifetime => LifetimeDefinition.Lifetime;
     
-    protected Flow(ILogger logger)
+    protected Flow(ILogger logger, Lifetime? lifetime = null)
     {
-        if (LifetimeDefinition is null)
-            LifetimeDefinition = new LifetimeDefinition();
+        LifetimeDefinition = lifetime is null ? new LifetimeDefinition() : Lifetime.Define(lifetime.Value);
+        LifetimeDefinition.Lifetime.OnTermination(() => Task.Run(Termination).GetAwaiter().GetResult());
 
-        LifetimeDefinition.Lifetime.OnTermination(() => Termination().GetAwaiter().GetResult());
-        
         Logger = logger;
-    }
-
-    protected Flow(ILogger logger, Lifetime lifetime) : this(logger)
-    {
-        LifetimeDefinition = Lifetime.Define(lifetime);
     }
 
     protected abstract Task Start();
