@@ -23,12 +23,13 @@ public abstract class Flow
     protected abstract Task Start();
     protected abstract Task Termination();
 
-    public async Task Ini()
+    public virtual Task Ini()
     {
         if (LifetimeDefinition.Status != LifetimeStatus.Alive)
-            return;
+            return Task.FromCanceled(Lifetime);
         
-        await Start();
+        Task.Run(Start, Lifetime);
+        return Task.CompletedTask;
     }
 
     public async Task Terminate()
