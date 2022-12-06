@@ -1,4 +1,4 @@
-namespace Automata.IO.Containers;
+namespace Automata.IO;
 
 public interface IFile : IO
 {
