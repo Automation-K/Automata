@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release /p:Version=${VERSION}
     - name: Pack
-      run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output
+      run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
       
     - name: Publish
       if: startsWith(github.ref, 'refs/tags/v')
