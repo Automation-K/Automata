@@ -14,8 +14,8 @@
         <PackageTags>automation</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>AutomataK</PackageId>
-        <PackageVersion>1.2.2.2</PackageVersion>
-        <AssemblyVersion>1.3.4.5</AssemblyVersion>
+        <PackageVersion></PackageVersion>
+        <AssemblyVersion></AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
