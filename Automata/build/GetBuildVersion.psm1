@@ -7,7 +7,7 @@ Function GetBuildVersion {
     $VersionString -match "(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+))?(\-(?<pre>[0-9A-Za-z\-\.]+))?(\+(?<build>\d+))?" | Out-Null
 
     if ($matches -eq $null) {
-        return "1.2.2"
+        return "1"
     }
 
     # Extract the build metadata
@@ -22,10 +22,6 @@ Function GetBuildVersion {
     $Major = [uint64]$matches['major']
 
     $Version = [string]$Major + '.' + [string]$Minor + '.' + [string]$Patch;
-   
-    if ($BuildRevision -ne 0) {
-        $Version = $Version + '.' + [string]$BuildRevision
-    }
 
     return $Version
 }
