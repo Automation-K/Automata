@@ -17,5 +17,5 @@ public sealed class File : IFile
         Name = name;
     }
 
-    public string Path => System.IO.Path.GetFullPath(Directory.Path + "/" + Name);
+    public string Path => IOShared.FileSystem.Path.GetFullPath(Directory.Path + "/" + Name);
 }

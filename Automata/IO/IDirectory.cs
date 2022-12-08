@@ -10,13 +10,13 @@ public sealed class Directory : IDirectory
 
     public Directory(string path)
     {
-        Path = System.IO.Path.GetFullPath(path + "/");
+        Path = IOShared.FileSystem.Path.GetFullPath(path + "/");
     }
 
     public Directory(IDirectory root, string name)
     {
         Root = root;
-        Path = System.IO.Path.GetFullPath(Root.Path + "/" + name);
+        Path = IOShared.FileSystem.Path.GetFullPath(Root.Path + "/" + name);
     }
 
     public string Path { get; }
