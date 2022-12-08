@@ -1,6 +1,6 @@
 namespace Automata.IO;
 
-public static class FileExtensions
+public static partial class FileExtensions
 {
     public static void Create(this IFile file)
     {
@@ -51,5 +51,10 @@ public static class FileExtensions
     public static async Task Delete(this IFile file)
     {
         IOShared.FileSystem.File.Delete(file.Path);
+    }
+
+    public static FileStream Stream(this IFile file)
+    {
+        return new FileStream(file.Path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
     }
 }
