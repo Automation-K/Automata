@@ -24,6 +24,52 @@ public static class DirectoryExtensions
         return direcotryInfo.GetFiles().Select(x => new File(dir, x.Name)).ToList<IFile>();
     }
 
+    public static async IAsyncEnumerable<IFile> EnumerateFiles(this IDirectory dir)
+    {
+        var directoryInfo = new DirectoryInfo(dir.Path);
+        foreach (var enumerateFile in directoryInfo.EnumerateFiles())
+        {
+            yield return dir.File(enumerateFile.Name);
+        }
+    }
+
+    public static async Task<List<IFile>> FilesDeep(this IDirectory root)
+    {
+        var files = new List<IFile>();
+        foreach (var dir in await root.Directories())
+        {
+            files.AddRange(await FilesDeep(dir));
+        }
+
+        var rootFiles = await root.Files();
+        files.AddRange(rootFiles);
+        return files;
+    }
+
+    public static async Task<List<IFile>> FilesDeep(this IDirectory root, Predicate<IFile> predicate)
+    {
+        var files = new List<IFile>();
+        foreach (var dir in await root.Directories())
+        {
+            files.AddRange(await FilesDeep(dir, predicate));
+        }
+
+        var rootFiles = await root.Files();
+        files.AddRange(rootFiles.Where(x => predicate(x)));
+        return files;
+    }
+
+    public static async IAsyncEnumerable<IFile> EnumerateFilesDeep(this IDirectory root)
+    {
+        await foreach (var enumerateFile in root.EnumerateFiles())
+            yield return enumerateFile;
+        
+        // Проходим по всем подпапкам
+        foreach (var directory in await root.Directories())
+            await foreach (var file in directory.EnumerateFilesDeep())
+                yield return file;
+    }
+
     public static async Task<List<IDirectory>> Directories(this IDirectory dir)
     {
         var dirInfo = new DirectoryInfo(dir.Path);

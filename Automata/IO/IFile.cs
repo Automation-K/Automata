@@ -8,14 +8,14 @@ public interface IFile : IO
 
 public sealed class File : IFile
 {
+    public string Path { get; }
     public IDirectory Directory { get; }
     public string Name { get; }
 
     public File(IDirectory directory, string name)
     {
+        Path = IO.CorrectSlash(Directory.Path + "/" + Name);
         Directory = directory;
         Name = name;
     }
-
-    public string Path => IOShared.FileSystem.Path.GetFullPath(Directory.Path + "/" + Name);
 }
