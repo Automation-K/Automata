@@ -17,6 +17,6 @@ public class RelativeFile : IRelativeFile
     {
         RelativeRoot = root;
         Name = name;
-        Path = IO.CorrectSlash(RelativeRoot.Path + name);
+        Path = IO.CorrectSlash(RelativeRoot.Path+"/" + name);
     }
 }

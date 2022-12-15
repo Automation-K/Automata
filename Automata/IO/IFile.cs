@@ -14,7 +14,7 @@ public sealed class File : IFile
 
     public File(IDirectory directory, string name)
     {
-        Path = IO.CorrectSlash(Directory.Path + "/" + Name);
+        Path = IO.CorrectSlash(directory.Path + "/" + name);
         Directory = directory;
         Name = name;
     }

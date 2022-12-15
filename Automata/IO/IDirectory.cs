@@ -17,7 +17,7 @@ public sealed class Directory : IDirectory
 
     public Directory(IDirectory root, string name)
     {
+        Path = IO.CorrectSlash(root.Path + "/" + name);
         Root = root;
-        Path = IO.CorrectSlash(Root.Path + "/" + name);
     }
 }
