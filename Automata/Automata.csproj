@@ -27,10 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions\Specific" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="AUTOMATA.png">
         <Pack>True</Pack>
         <PackagePath></PackagePath>
