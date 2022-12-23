@@ -62,4 +62,13 @@ public static partial class FileExtensions
     {
         return new FileStream(file.Path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
     }
+
+    public static IFile Rename(this IFile file, string newNameWithoutExtension)
+    {
+        var ext = file.Extension();
+        var oldPath = file.Path;
+        var newFile = file.Directory.File(newNameWithoutExtension + ext);
+        IOShared.FileSystem.File.Move(oldPath, newFile.Path);
+        return newFile;
+    }
 }
