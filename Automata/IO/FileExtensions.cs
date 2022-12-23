@@ -37,6 +37,11 @@ public static partial class FileExtensions
         return IOShared.FileSystem.Path.GetFileNameWithoutExtension(file.Name);
     }
 
+    public static string Extension(this IFile file)
+    {
+        return IOShared.FileSystem.Path.GetExtension(file.Name);
+    }
+    
     public static async Task WriteAsync(this IFile file, string text)
     {
         file.Create();

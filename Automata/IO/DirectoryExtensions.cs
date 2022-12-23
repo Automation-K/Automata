@@ -102,4 +102,16 @@ public static class DirectoryExtensions
         return new File(new Directory(IOShared.FileSystem.Path.GetDirectoryName(files[0])!),
             IOShared.FileSystem.Path.GetFileName(files[0]));
     }
+    
+    public static IDirectory Join(this IDirectory directory, IRelativeDirectory relativeDirectory)
+    {
+        var newDir = new Directory($"{directory.Path}/{relativeDirectory.Path}/");
+        return newDir;
+    }
+    
+    public static IFile Join(this IDirectory directory, IRelativeFile relativeFile)
+    {
+        var newDir = directory.Join(relativeFile.RelativeRoot);
+        return newDir.File(relativeFile.Name);
+    }
 }
