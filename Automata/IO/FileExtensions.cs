@@ -2,6 +2,11 @@ namespace Automata.IO;
 
 public static partial class FileExtensions
 {
+    public static string Prefix(this IFile file)
+    {
+        return IOShared.FileSystem.Path.GetFileNameWithoutExtension(file.Name);
+    }
+
     public static void Create(this IFile file)
     {
         if (!file.Directory.Exist())
