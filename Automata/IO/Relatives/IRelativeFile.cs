@@ -1,6 +1,6 @@
 namespace Automata.IO;
 
-public interface IRelativeFile : IO
+public interface IRelativeFile : RelativeIO
 {
     IRelativeDirectory RelativeRoot { get; }
     string Name { get; }

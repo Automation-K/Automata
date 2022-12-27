@@ -1,6 +1,6 @@
 namespace Automata.IO;
 
-public interface IRelativeDirectory : IO
+public interface IRelativeDirectory : RelativeIO
 {
     
 }
