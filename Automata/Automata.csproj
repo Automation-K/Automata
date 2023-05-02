@@ -17,6 +17,7 @@
         <PackageVersion></PackageVersion>
         <AssemblyVersion></AssemblyVersion>
         <PackageIcon>AUTOMATA.png</PackageIcon>
+        <Version>1.5.6</Version>
     </PropertyGroup>
 
     <ItemGroup>

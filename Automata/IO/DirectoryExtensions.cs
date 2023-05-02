@@ -114,4 +114,51 @@ public static class DirectoryExtensions
         var newDir = directory.Join(relativeFile.RelativeRoot);
         return newDir.File(relativeFile.Name);
     }
+
+    public static bool Compare(this IDirectory original, IDirectory? compare)
+    {
+        if (compare is null)
+            return false;
+
+        if (original.Path == compare.Path)
+            return true;
+
+        return false;
+    }
+
+    public static DirectoryInfo Info(this IDirectory directory)
+    {
+        return new DirectoryInfo(directory.Path);
+    }
+
+    public static IDirectory ToDirectory(this DirectoryInfo info) => new Directory(info.FullName);
+
+    public static string Name(this IDirectory directory) => directory.Info().Name;
+    
+    public static IDirectory? Parent(this IDirectory directory)
+    {
+        var parent = directory.Info().Parent?.ToDirectory();
+        return parent;
+    }
+
+    public static bool HasInheritance(this IDirectory a, IDirectory? b)
+    {
+        if (b is null)
+            return false;
+
+        var s = a.Path.Length <= b.Path.Length ? a : b;
+        var l = s == a ? b : a;
+
+        var sPath = s.Path;
+
+        IDirectory? parent = null;
+        parent = l.Parent();
+        while (parent is not null)
+        {
+            if (parent.Path == sPath)
+                return true;
+            parent = parent.Parent();
+        }
+        return false;
+    }
 }
